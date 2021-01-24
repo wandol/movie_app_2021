@@ -1,47 +1,43 @@
 import React from "react";
-import PropType from "prop-types";
+class App extends React.Component{
 
-function Food({name, picture, rating}){
-  return (<div>
-      <h1>I like {name}!</h1>
-      <h4>{rating}</h4>
-      <img src={picture} alt={name}/>
-    </div>
-  )
-}
-
-Food.prototype = {
-  name: PropType.string.isRequired,
-  rating: PropType.number.isRequired,
-  image: PropType.string.isRequired
-}
-
-const foodILike = [
-  {
-    id: 1,
-    name:"Kimchi",
-    rating: 5,
-    image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxn1r0L3_E3B0XVsU4CvIv0159c0ZQ0ZRTW_NMd2E6Xgh22ARK72vj-wa_uA&usqp=CAc"
-  },
-  {
-    id: 2,
-    name:"Kimchi2",
-    rating: 6,
-    image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxn1r0L3_E3B0XVsU4CvIv0159c0ZQ0ZRTW_NMd2E6Xgh22ARK72vj-wa_uA&usqp=CAc"
+  constructor(props){
+    super(props);
+    console.log("hello");
   }
-];
+  state = {
+    count: 0
+  }
+  add = () => {
+    console.log("add");
+    this.setState(current => ({count: current.count + 1}));
+  };
+  minus = () => {
+    console.log("minus");
+    this.setState(current => ({count: current.count - 1}));
+  };
+  componentDidMount(){
+    console.log("Mount");
+  }
 
-function renderFood(dish){
-  return <Food key={dish.id} name={dish.name} picture={dish.image} rating={dish.rating}/>
-}
+  componentDidUpdate(){
+    console.log("update");
+  }
 
-function App() {
-  return (
-    <div>
-      <h1>Hello!!</h1>
-      {foodILike.map(renderFood)}
-    </div>
-  );
+  componentWillUnmount(){
+    console.log("unmount");
+  }
+
+  render(){
+    console.log("render");
+    return (
+      <div>
+        <h1>The number is {this.state.count}</h1>
+        <button onClick={this.add}>Add</button>
+        <button onClick={this.minus}>Minus</button>
+      </div>
+    )
+  }  
 }
 
 export default App;
